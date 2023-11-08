@@ -1,0 +1,300 @@
+@use 'sass:math';
+
+// 变量
+$color-primary: #42b983;
+$border-color: #eaecef;
+$text-color: #4d4d4d;
+
+$font-size: 14px;
+
+$border: 1px solid $border-color;
+$tab-trans: all 0.3s ease-in-out;
+
+$hd-height: 40px;
+
+$tab-padding: 20px;
+$close-icon-margin: 4px;
+$close-icon-size: 13px;
+
+// 页签
+.router-tab {
+  $slider-width: 15px; // 左右滑动按钮宽度
+
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+
+  // 页签头部
+  &__header {
+    position: relative;
+    z-index: 9;
+    display: flex;
+    flex: none;
+    box-sizing: border-box;
+    height: $hd-height;
+    border-bottom: 1px solid $border-color;
+    transition: all 0.2s ease-in-out;
+  }
+
+  // 滚动区域
+  &__scroll {
+    position: relative;
+    flex: 1 1 0px;
+    height: $hd-height;
+    overflow: hidden;
+
+    &-container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+
+      // 移动设备原生滚动
+      &.is-mobile {
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
+    }
+  }
+
+  // 滚动条
+  &__scrollbar {
+    $h: 3px;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: $h;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: $h;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+
+    .router-tab__scroll:hover &,
+    &.is-dragging {
+      opacity: 1;
+    }
+
+    &-thumb {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: $h;
+      transition: background-color 0.3s ease-in-out;
+
+      &:hover,
+      .router-tab__scrollbar.is-dragging & {
+        background-color: rgba($color-primary, 0.8);
+      }
+    }
+  }
+
+  // 页签导航
+  &__nav {
+    position: relative;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  // 页签项
+  &__item {
+    position: relative;
+    display: flex;
+    flex: none;
+    align-items: center;
+    padding: 0 $tab-padding;
+    color: $text-color;
+    font-size: $font-size;
+    border: $border;
+    border-left: none;
+    transform-origin: left bottom;
+    cursor: pointer;
+    transition: $tab-trans;
+    user-select: none;
+
+    &:first-child {
+      border-left: $border;
+    }
+
+    // 激活右键菜单的页签
+    &.is-contextmenu {
+      color: #000;
+    }
+
+    &:hover,
+    &.is-active {
+      color: $color-primary;
+
+      &.is-closable {
+        padding: 0
+          ($tab-padding - math.div($close-icon-size + $close-icon-margin, 2));
+      }
+
+      .router-tab__item-close {
+        width: $close-icon-size;
+        margin-left: $close-icon-margin;
+
+        &::before,
+        &::after {
+          border-color: $color-primary;
+        }
+      }
+    }
+
+    // 激活的页签
+    &.is-active {
+      border-bottom-color: #fff;
+    }
+
+    // 拖拽经过
+    &.is-drag-over {
+      background: rgba(0, 0, 0, 0.05);
+      transition: background 0.15s ease;
+    }
+
+    // 页签标题
+    &-title {
+      min-width: 30px;
+      max-width: 100px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    // 页签图标
+    &-icon {
+      margin-right: 5px;
+      font-size: 16px;
+    }
+
+    // 页签关闭按钮
+    &-close {
+      $inner: 8px;
+
+      position: relative;
+      display: block;
+      width: 0;
+      height: $close-icon-size;
+      margin-left: 0;
+      overflow: hidden;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: $tab-trans;
+
+      &::before,
+      &::after {
+        position: absolute;
+        top: 6px;
+        left: 50%;
+        display: block;
+        width: $inner;
+        height: 1px;
+        margin-left: math.div(-$inner, 2);
+        background-color: $text-color;
+        transition: background-color 0.2s ease-in-out;
+        content: '';
+      }
+
+      &::before {
+        transform: rotate(-45deg);
+      }
+
+      &::after {
+        transform: rotate(45deg);
+      }
+
+      &:hover {
+        background-color: mix($text-color, #fff, 50%);
+
+        &::before,
+        &::after {
+          background-color: #fff;
+        }
+      }
+    }
+  }
+
+  // 页面容器
+  &__container {
+    position: relative;
+    flex: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: #fff;
+    transition: all 0.4s ease-in-out;
+
+    > .router-alive {
+      height: 100%;
+    }
+  }
+
+  // iframe 页面
+  &__iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  // 右键菜单
+  &__contextmenu {
+    position: fixed;
+    z-index: 999;
+    min-width: 120px;
+    padding: 8px 0;
+    font-size: $font-size;
+    background: #fff;
+    border: $border;
+    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
+    transform-origin: left top;
+    transition: all 0.25s ease-in;
+
+    &-item {
+      position: relative;
+      display: block;
+      padding: 0 20px;
+      color: $text-color;
+      line-height: 30px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      user-select: none;
+
+      &:hover,
+      &:active {
+        color: $color-primary;
+      }
+
+      &[disabled] {
+        color: #aaa;
+        background: none;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      // 拥有图标
+      .has-icon & {
+        padding-left: 30px;
+      }
+    }
+
+    &-icon {
+      position: absolute;
+      top: 0;
+      left: 8px;
+      display: none;
+      line-height: 30px;
+
+      // 拥有图标
+      .has-icon & {
+        display: block;
+      }
+    }
+  }
+}

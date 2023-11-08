@@ -1,0 +1,66 @@
+{
+  "name": "router-tab-vue3",
+  "version": "0.1.0",
+  "scripts": {
+    "demo:dev": "vue-cli-service serve --open",
+    "demo:build": "vue-cli-service build",
+    "docs:dev": "vuepress dev docs --open",
+    "docs:build": "vuepress build docs",
+    "lib:build": "vue-cli-service build --target lib lib/index.js",
+    "lib:build:report": "vue-cli-service build --report --target lib lib/index.js",
+    "lib:publish": "npm run lib:build && npm publish"
+  },
+  "keywords": [
+    "vue-router-tab",
+    "router-tab",
+    "tabs"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhuh12/vue-router-tab.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bhuh12/vue-router-tab/issues"
+  },
+  "main": "dist/lib/router-tab-vue3.umd.min.js",
+  "dependencies": {
+    "core-js": "^3.8.3",
+    "vue": "^3.2.13",
+    "vue-router": "^4.2.5",
+    "vue-router-tab": "^1.2.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "css-loader": "^6.8.1",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "sass": "^1.69.5",
+    "sass-loader": "^10.1.1",
+    "style-loader": "^3.3.3"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}
