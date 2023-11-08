@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
+// import Vue from 'vue'
 
 export default {
 
@@ -40,19 +40,19 @@ export default {
 
   beforeCreate() {
     // 全局语言方法
-    Vue.prototype.$lang = {
-      set: lang => {
-        this.currentLang = lang
-      },
-
-      get: () => this.currentLang,
-
-      list: () => Object.keys(this.langs)
-    }
+    // Vue.prototype.$lang = {
+    //   set: lang => {
+    //     this.currentLang = lang
+    //   },
+    //
+    //   get: () => this.currentLang,
+    //
+    //   list: () => Object.keys(this.langs)
+    // }
   },
 
   unmounted() {
-    Vue.prototype.$lang = null
+    // Vue.prototype.$lang = null
   },
 
   methods: {

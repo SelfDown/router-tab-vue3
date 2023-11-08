@@ -1,5 +1,6 @@
 <template>
   <router-tab
+      ref="tabs"
     :class="{ 'is-fullscreen': fullscreen }"
     :contextmenu="contextmenu"
   />
@@ -12,6 +13,7 @@ import fullscreen from '../../mixins/fullscreen'
 export default {
   name: "contextMenu",
   mixins: [fullscreen],
+  inject:["$tabs"],
 
   computed: {
     // 右键菜单

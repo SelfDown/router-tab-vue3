@@ -1,5 +1,5 @@
 <template>
-  <router-tab :class="{ 'is-fullscreen': fullscreen }">
+  <router-tab ref="tabs"  :class="{ 'is-fullscreen': fullscreen }">
     <!-- 页签开始 -->
     <template #start>
       <router-link

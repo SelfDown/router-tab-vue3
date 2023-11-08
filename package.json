@@ -13,7 +13,8 @@
   "keywords": [
     "vue-router-tab",
     "router-tab",
-    "tabs"
+    "tabs",
+    "vue3"
   ],
   "license": "MIT",
   "repository": {
@@ -27,8 +28,7 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
-    "vue-router": "^4.2.5",
-    "vue-router-tab": "^1.2.11"
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
