@@ -18,10 +18,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bhuh12/vue-router-tab.git"
+    "url": "git+https://github.com/SelfDown/router-tab-vue3"
   },
   "bugs": {
-    "url": "https://github.com/bhuh12/vue-router-tab/issues"
+    "url": "https://github.com/SelfDown/router-tab-vue3/issues"
   },
   "main": "dist/lib/router-tab-vue3.umd.min.js",
   "dependencies": {
